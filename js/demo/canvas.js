@@ -355,7 +355,7 @@ var canv=function() {
     return{
         init:function(){
             if(document.getElementById('canvas')){
-                isGameOver=true;//活动结束
+                isGameOver=false;//活动结束
                 //设置刮奖出发次数
                 timeNum={"android":[40,55,90],"ios":[45,65,100]};//
                 width=225;
