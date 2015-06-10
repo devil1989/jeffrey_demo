@@ -3,9 +3,43 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
-	<script type="text/javascript" src="/jeffrey_demo/js/demo/component.js"></script>
+	<style>
+	.box-radius{
+		display: none;
+		margin: 40px 0px 0px 40px;
+		height: 200px;
+		width: 200px;
+		background:-webkit-gradient(linear,left top,right bottom,from(#5D544B),to(#000));/*渐变：线性渐变，径向渐变*/
+		border-radius: 10px;/*圆角*/
+		/*-webkit-box-reflect:;*//*倒影*/
+		box-shadow: 3px 3px 12px 1px #000;/*块元素阴影*/
+		text-shadow:3px 3px 12px #000;/*文字阴影*/
+		-webkit-transform:rotate(30deg) translate(49px,5px) scale(1,0.8) skew(30deg,10deg) ;/*旋转,平移,缩放,扭曲*/
+		transform-origin:top left;/*旋转中心点设置*/
+		
+	}
+	.box-content{
+		width: 800px;
+		display: -webkit-box;
+		/*float: right;*/
+	}
+	.box-content div{
+		height: 100px;
+		background: #e3e3e3;
+		border: 1px solid #f00;
+		-webkit-box-flex:1;
+		padding:10px;
+		margin:0px 4px;
+	}
+	.box-content .double{
+		-webkit-box-flex:2;
+	}
+	</style>
 </head>
 <body>
+	<iframe src="" frameborder="0">
+		
+	</iframe>
 	
 </body>
 </html>
