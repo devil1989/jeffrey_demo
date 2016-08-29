@@ -80,7 +80,7 @@ var requirejs, require, define;
         return hasProp(obj, prop) && obj[prop];
     }
 
-    //遍历对象的私有属性
+    //遍历对象的私有属性，执行每个func(值，属性)
     function eachProp(obj, func) {
         var prop;
         for (prop in obj) {
@@ -167,6 +167,8 @@ var requirejs, require, define;
         return e;
     }
 
+    /*********************************************************executes start*********************************************************/
+
     //如果define已经存在了，说明已经有一个AMD 模块加载器了，直接return，不用requirejs
     if (typeof define !== 'undefined') {
         //If a define is already in play via another AMD loader,
@@ -192,6 +194,8 @@ var requirejs, require, define;
         cfg = require;
         require = undefined;
     }
+
+    /*********************************************************executes end*********************************************************/
 
     function newContext(contextName) {
         var inCheckLoaded, Module, context, handlers,
@@ -1758,6 +1762,8 @@ var requirejs, require, define;
         fn();
     };
 
+
+    /*********************************************************executes start*********************************************************/
     /**
      * Export require as a global, but only if it does not already exist.
      */
@@ -1811,6 +1817,9 @@ var requirejs, require, define;
      * @param {Error} err the error object.
      */
     req.onError = defaultOnError;
+
+
+    /*********************************************************executes end*********************************************************/
 
     /**
      * Creates the node for the load command. Only used in browser envs.
@@ -1934,6 +1943,8 @@ var requirejs, require, define;
         return interactiveScript;
     }
 
+
+    /*********************************************************executes start*********************************************************/
     //Look for a data-main script attribute, which could also adjust the baseUrl.
     if (isBrowser && !cfg.skipDataMain) {
         //Figure out baseUrl. Get it from the script tag with require.js in it.
@@ -1979,6 +1990,8 @@ var requirejs, require, define;
             }
         });
     }
+
+    /*********************************************************executes end*********************************************************/
 
     /**
      * The function that handles definitions of modules. Differs from
@@ -2050,6 +2063,8 @@ var requirejs, require, define;
         (context ? context.defQueue : globalDefQueue).push([name, deps, callback]);
     };
 
+
+    /*********************************************************executes start*********************************************************/
     define.amd = {
         jQuery: true
     };
@@ -2069,4 +2084,6 @@ var requirejs, require, define;
 
     //Set up with config info.
     req(cfg);
+
+    /*********************************************************executes end*********************************************************/
 }(this));

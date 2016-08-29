@@ -1,0 +1,32 @@
+1.全局安装grunt命令：npm install -g grunt-cli（Grunt CLI的任务很简单：调用与Gruntfile在同一目录中 Grunt。这样带来的好处是，允许你在同一个系统上同时安装多个版本的 Grunt。）
+2.进入项目的感根目录，创建grunt
+3.进入上面创建的grunt文件夹，执行npm install grunt 来安装grunt
+4.创建package.json和GruntFile.js文件，示例可以在http://www.gruntjs.net/getting-started中找到
+5.用npm install module-name --save-dev 来安装grunt对应的任务插件
+
+
+
+
+
+grunt常用插件：
+   //加载对应插件
+    grunt.loadNpmTasks('grunt-curl');// npm install grunt-curl
+    grunt.loadNpmTasks('grunt-closure-compiler');// npm install grunt-closure-compiler
+    grunt.loadNpmTasks('grunt-strip');//删除js中的console.log等浏览器调试语句//npm install grunt-strip
+    grunt.loadNpmTasks('grunt-replace');//文本替换//npm install grunt-replace --save-dev
+
+    grunt.loadNpmTasks('grunt-contrib-requirejs');//requirejs加载//npm install grunt-contrib-requirejs --save-dev
+    grunt.loadNpmTasks('grunt-contrib-cssmin');//css压缩//npm install grunt-contrib-cssmin --save-dev
+    grunt.loadNpmTasks('grunt-contrib-clean');//清空文件夹//npm install grunt-contrib-clean --save-dev
+    grunt.loadNpmTasks('grunt-contrib-copy');//复制文件和文件夹//npm install grunt-contrib-copy --save-dev
+    grunt.loadNpmTasks('grunt-contrib-uglify');//压缩js//npm install grunt-contrib-uglify --save-dev
+    grunt.loadNpmTasks('grunt-contrib-compress');//文件合并压缩//npm install grunt-contrib-compress --save-dev
+    grunt.loadNpmTasks('grunt-contrib-htmlmin');//压缩html //npm install grunt-contrib-htmlmin --save-dev
+    grunt.loadNpmTasks('grunt-contrib-jshint');//js检验 //npm install grunt-contrib-jshint --save-dev
+
+    多文件合并：grunt-contrib-concat
+    图片压缩：grunt-contrib-imagemin
+
+
+
+如果想要在git提交的时候，忽略对应的grunt文件，可以直接把整个grunt文件夹忽略，但是，一般只忽略grunt文件夹中的node_modules文件夹
