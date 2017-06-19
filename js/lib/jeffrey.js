@@ -366,25 +366,26 @@
     },
 
     //类继承方法（parent：父类对象或者父类方法，initializer:类的构造函数）
-    Class: function(parent, initializer) {
-      if (!initializer) {
+    Class: function(parent, initializer,needUseParentConstructor) {
+      if (!initializer) {//如果只有一个参数，就表明只是声明一个构造函数，没有继承
         initializer = parent;
         parent = function() {};
       }
       var supper = typeof parent == "function" ? parent.prototype : parent; //父类
       var originFunction = function() {
+          needUseParentConstructor&&parent.apply(this,arguments);//定义类的时候，设定是否需要调用“父类的构造函数”
           typeof initializer == "function" && initializer.apply(this, arguments);
         }
         //originFunction继承自parent
-      originFunction.prototype = supper;
-      originFunction.prototype.constructor = originFunction;
+      originFunction.prototype = supper;//继承了父类原型的方法和属性
+      originFunction.prototype.constructor = originFunction;//指回自己的构造函数
 
-      //拓展属性方法
-      originFunction.extend = originFunction.prototype.extend = function(o) {
-        for (key in o) {
-          this[key] = o[key];
-        }
-      };
+      // //拓展属性方法
+      // originFunction.extend = originFunction.prototype.extend = function(o) {
+      //   for (key in o) {
+      //     this[key] = o[key];
+      //   }
+      // };
       return originFunction;
     },
 
@@ -393,6 +394,26 @@
       for (var key in addObj) {
         origin[key] = addObj[key];
       }
+    },
+
+    //支持多对象拓展,越后面的对象，他的属性的优先级越高
+    extend:function(){
+      var args = [].slice.call(arguments);
+      var source = args.shift() || {};
+
+      if (!source) {
+        return false;
+      }
+
+      for (var i = 0, l = args.length; i < l; i++) {
+        if (typeof args[i] === 'object') {
+          for (var key in args[i]) {
+            source[key] = args[i][key];
+          }
+        }
+      }
+
+      return source;
     },
     getQuery:function (name) {//查找url后面的参数值
       var path = /\?([^#]*)(#|$)/.exec(location.href);
@@ -403,6 +424,29 @@
           }
       }
       return null;
+    },
+
+    //包裹ele元素，给该元素的所有事件句柄执行之前添加自己的track代码
+    wrap:function(ele){
+      var self=ele,i=0;
+      ele.addEventListener=tgFunction(ele.addEventListener);
+      function tgFunction(callback){
+          var _callback=callback;
+          return function(){
+              var wrapperHandels=function(handel){
+                  return function(){
+
+                      self.setAttribute("data-index",++i);
+                      handel.apply(this,arguments);
+                  }
+              }
+              if(arguments[1]){//重写调用的handel函数
+                  arguments[1]=wrapperHandels(arguments[1]);
+              }
+              _callback.apply(this,arguments);
+          }
+      }
+      return self;
     }
 
   };

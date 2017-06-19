@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="./js/lib/doT.js"></script>
+</head>
+<body>
+	<script type="text/javascript">
+	 	var arr={val:[{name:"jiajiechen"},{name:"ly"},{name:"fly"}]};
+	 	var tpl="{{var tgarr=it.val; for (var i=0;i<tgarr.length;i++) {}} <div>{{=tgarr[i].name}}</div> {{}}}";
+		var str=doT.template(tpl)(arr);
+		alert(str);
+
+		// var arr={val:[{name:"jiajiechen"},{name:"ly"},{name:"fly"}]};
+	 // 	var tpl="{{? it.val.length>2 }} <div>{{=it.val[0].name}}</div> {{?? it.val.length<0 }} <div>{{=it.val[1].name}}</div> {{??}} You are {{=it.val[2].name}} {{?}}";
+		// var str=doT.template(tpl)(arr);
+		alert(str);
+	</script>
+</body>
+</html>
